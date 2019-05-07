@@ -1,16 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link as RLink } from 'react-router-dom';
 import styled from 'styled-components';
 import dummy from './dummyData';
 
+const Link = styled(RLink)`
+    text-decoration: none;
+    font-family: Karla;
+    color: black;
+
+    &:visited, &:hovered {
+        color: black;
+    }
+`;
+
 const List = styled.ul`
     list-style: none;
-    border: 1px solid red;
     padding: .5em;
-    & > li {
-
-    }
 `;
 
 const ListItem = styled.li`
