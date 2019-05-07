@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Detail = ({ details }) => (
     <div>
+        <Link to='/'>Back to home</Link>
         <h2>Character Detail</h2>
         <table>
             <thead>

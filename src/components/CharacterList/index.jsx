@@ -29,10 +29,10 @@ const ListItem = styled.li`
     }
 `;
 
-const CharacterList = ({ characters = dummy }) => (
+const CharacterList = ({ characters = dummy, action }) => (
     <List>
         {characters.map((c,i) => 
-            <ListItem key={`listitem-${i}`}><Link to={`/detail?char=${c}`}>{c}</Link></ListItem>    
+            <ListItem key={`listitem-${i}`}><Link to={`/detail?char=${c.name}`} onClick={() => action(c)}>{c.name}</Link></ListItem>    
         )}
     </List>
 );

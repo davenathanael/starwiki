@@ -43,7 +43,6 @@ class Home extends React.Component {
         if (loading) return <p>Loading...</p>;
         const { results } = apiResult;
 
-        const characters = results.map(c => c.name);
         let pages = [];
 
         for (let i = 1; i <= Math.ceil(apiResult.count / 10); i++) {
@@ -53,10 +52,12 @@ class Home extends React.Component {
             });
         }
 
+        const { addCharacterDetail } = this.props;
+
         return (
             <div>
                 <h2>Homepage</h2>
-                <CharacterList characters={characters} />
+                <CharacterList characters={results} action={(character) => addCharacterDetail(character)} />
                 <Pagination pages={pages} active={activePage} />
             </div>
         );
