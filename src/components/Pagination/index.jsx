@@ -22,8 +22,8 @@ const Page = styled.button`
 
 const Pagination = ({ pages, active }) => (
     <Wrapper>
-        {pages.map(p => 
-            <Page onClick={() => p.action()} type='button' active={p.pageNumber === active}>{p.pageNumber}</Page>
+        {pages.map((p, i) => 
+            <Page key={`page-${i+1}`} onClick={() => p.action()} type='button' active={p.pageNumber === active}>{p.pageNumber}</Page>
         )}
     </Wrapper>
 );

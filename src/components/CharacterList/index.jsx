@@ -31,8 +31,8 @@ const ListItem = styled.li`
 
 const CharacterList = ({ characters = dummy }) => (
     <List>
-        {characters.map(c => 
-            <ListItem><Link to={`/detail?char=${c}`}>c</Link></ListItem>    
+        {characters.map((c,i) => 
+            <ListItem key={`listitem-${i}`}><Link to={`/detail?char=${c}`}>{c}</Link></ListItem>    
         )}
     </List>
 );
