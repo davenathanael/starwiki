@@ -4,6 +4,9 @@ import axios from 'axios';
 import CharacterList from '../../components/CharacterList';
 import Pagination from '../../components/Pagination';
 
+import { addCharacterDetail as addCharacterDetailAction } from './actions';
+import { connect } from 'react-redux';
+
 const API_URL = 'https://swapi.co/api';
 
 class Home extends React.Component {
@@ -61,4 +64,8 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+const mapDispatchToProps = (dispatch) => ({
+    addCharacterDetail: (details) => dispatch(addCharacterDetailAction(details))
+});
+
+export default connect(null, mapDispatchToProps)(Home);
