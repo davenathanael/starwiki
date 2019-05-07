@@ -1,63 +1,43 @@
 import React from 'react';
-import axios from 'axios';
 
 import CharacterList from '../../components/CharacterList';
 import Pagination from '../../components/Pagination';
 
-import { addCharacterDetail as addCharacterDetailAction } from './actions';
+import {
+    addCharacterDetail as addCharacterDetailAction,
+    fetchCharacters as fetchCharactersAction
+} from './actions';
 import { connect } from 'react-redux';
 
-const API_URL = 'https://swapi.co/api';
 
 class Home extends React.Component {
-    state = {
-        activePage: 1,
-        apiResult: {},
-        loading: true
+    componentDidMount() {
+        const { characters, activePage } = this.props;
+        if (characters.length === 0) {
+            this.props.fetchCharacters(activePage);
+        }
     }
-
-    paginateTo = async (page) => {
-        const apiResult = await this.fetchCharacters(page);
-        this.setState({
-            activePage: page,
-            apiResult
-        })
-    }
-
-    async componentDidMount() {
-        const apiResult = await this.fetchCharacters(1);
-        this.setState({
-            apiResult,
-            loading: false
-        });
-    }
-
-    fetchCharacters = async (page) => {
-        const res = await axios.get(`${API_URL}/people/?page=${page}`);
-        return res.data;
-    }
-
 
     render() {
-        const { apiResult, activePage, loading } = this.state;
-        if (loading) return <p>Loading...</p>;
-        const { results } = apiResult;
+        const { characters, activePage, totalCount, addCharacterDetail, fetchCharacters } = this.props;
+
+        if (characters === undefined)
+            return <h1>Loading...</h1>;
 
         let pages = [];
 
-        for (let i = 1; i <= Math.ceil(apiResult.count / 10); i++) {
+        for (let i = 1; i <= Math.ceil(totalCount / 10); i++) {
             pages.push({
                 pageNumber: i,
-                action: () => this.paginateTo(i),
+                action: () => fetchCharacters(i),
             });
         }
-
-        const { addCharacterDetail } = this.props;
 
         return (
             <div>
                 <h2>Homepage</h2>
-                <CharacterList characters={results} action={(character) => addCharacterDetail(character)} />
+                <p>Select a character!</p>
+                <CharacterList characters={characters} action={(character) => addCharacterDetail(character)} />
                 <Pagination pages={pages} active={activePage} />
             </div>
         );
@@ -65,8 +45,15 @@ class Home extends React.Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    addCharacterDetail: (details) => dispatch(addCharacterDetailAction(details))
+const mapStateToProps = (state) => ({
+    characters: state.characters.characters,
+    activePage: state.characters.activePage,
+    totalCount: state.characters.totalCount
 });
 
-export default connect(null, mapDispatchToProps)(Home);
+const mapDispatchToProps = (dispatch) => ({
+    addCharacterDetail: (details) => dispatch(addCharacterDetailAction(details)),
+    fetchCharacters: (page) => dispatch(fetchCharactersAction(page))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

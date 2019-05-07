@@ -10,13 +10,14 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
-import homeReducer from './containers/Home/reducers';
+import { details, characters } from './containers/Home/reducers';
 
 const middleware = [thunk, createLogger()];
 
 const store = createStore(
     combineReducers({
-        details: homeReducer
+        details,
+        characters
     }),
     applyMiddleware(...middleware)
 );
