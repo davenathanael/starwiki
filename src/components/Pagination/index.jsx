@@ -12,8 +12,9 @@ const Page = styled.button`
     margin: 1em;
     padding: 1em;
     outline: none;
-    background: ${props => props.active ? 'lightgrey' : 'none'};
-    border: 1px solid black;
+    border: none;
+    background: ${props => props.active ? '#e5e5e5' : 'none'};
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.5);
 
     &:hover {
         cursor: pointer;

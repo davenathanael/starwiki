@@ -1,25 +1,57 @@
 import React from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link as RLink } from 'react-router-dom';
+
+const Link = styled(RLink)`
+    &, &:visited {
+        color: #a1a3cc;
+    }
+`;
+
+const Table = styled.table`
+    margin: 1em;
+    border-collapse: collapse;
+    box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.5);
+
+    & td, & th {
+        font-family: Karla;
+    }
+    & thead th, & tbody td {
+        padding: .5em 1em;
+        
+    }
+    & ul {
+        list-style: none;
+    }
+
+    & > thead {
+        background: #a1a3cc;
+    }
+
+    & > tbody > tr:nth-child(odd) {
+        background: #e5e5e5;
+    }
+`;
 
 const Detail = ({ details }) => {
     if (details.films === undefined) {
         return (
             <div>
                 <h1>Please select a character from the home page</h1>
-                <Link to='/'>Back to home</Link>
+                <Link to='/'>&#60;   Back to home</Link>
             </div>
         );
     }
     return (
         <div>
-            <Link to='/'>Back to home</Link>
             <h2>Character Detail</h2>
-            <table>
+            <Link to='/'>&#60;   Back to home</Link>
+            <Table>
                 <thead>
                     <tr>
-                        <td>Attribute</td>
-                        <td>Detail</td>
+                        <th>Attribute</th>
+                        <th>Detail</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,7 +88,7 @@ const Detail = ({ details }) => {
                         <td>{details.gender}</td>
                     </tr>
                     <tr>
-                        <td>homeworld</td>
+                        <td>Homeworld</td>
                         <td>{details.homeworld}</td>
                     </tr>
                     <tr>
@@ -104,8 +136,8 @@ const Detail = ({ details }) => {
                         <td>{details.created}</td>
                     </tr>
                     <tr>
-                        <td>Updated at</td>
-                        <td>{details.updated}</td>
+                        <td>Edited at</td>
+                        <td>{details.edited}</td>
                     </tr>
                     <tr>
                         <td>URL</td>
@@ -113,7 +145,7 @@ const Detail = ({ details }) => {
                     </tr>
     
                 </tbody>
-            </table>
+            </Table>
         </div>
     );
 }

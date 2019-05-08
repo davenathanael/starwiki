@@ -22,10 +22,12 @@ const List = styled.ul`
 const ListItem = styled.li`
     padding: .5em;
     margin: 1em 0;
-    border: 1px solid black;
+    // border: 1px solid black;
+    box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.5);
+    transition: background .3s ease;
 
     &:hover {
-        background: lightgrey;
+        background: #e5e5e5;
     }
 `;
 
