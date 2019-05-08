@@ -1,4 +1,5 @@
-import axios from 'axios';
+import fetchData from '../../utils/fetchData';
+
 import {
     ADD_CHARACTER_DETAILS,
     ADD_CHARACTERS,
@@ -18,8 +19,8 @@ export const addCharacters = (characters, activePage, totalCount) => ({
 });
 
 export const fetchCharacters = (page) => async (dispatch) => {
-    const res = await axios.get(`${config.apiURL}/people/?page=${page}`);
-    const characters = res.data.results;
-    const totalCount = res.data.count;
+    const res = await fetchData(`${config.apiURL}/people/?page=${page}`);
+    const characters = res.results;
+    const totalCount = res.count;
     return dispatch(addCharacters(characters, page, totalCount));
 };
