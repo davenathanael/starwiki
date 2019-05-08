@@ -17,6 +17,7 @@ const Layout = ({ children }) => (
         <Wrapper>
             <h1>StarWiki</h1>
             <p><i>A StarWars characters wiki powered by <a href="https://swapi.co/" rel="noopener noreferrer" target="_blank">Swapi</a></i></p>
+            <p>Made by Dave. <a href="https://github.com/davenathanael/starwiki" rel="noopener noreferrer" target="_blank">Github</a></p>
         </Wrapper>
 
         {children}
